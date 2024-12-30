@@ -1,0 +1,66 @@
+# KY-040 Rotary Encoder
+
+This directory contains tools, libraries, and example code for working with the KY-040 rotary encoder.
+
+## Features
+- Detect rotation direction (clockwise or counterclockwise).
+- Read rotary encoder signal (CLK and DT pins).
+- Process button press from the built-in switch.
+
+## Pin Description
+| Pin Name | Description                                  |
+|----------|----------------------------------------------|
+| **CLK**  | Clock signal: Pulse generated when rotated.  |
+| **DT**   | Data signal: Works with CLK to determine direction. |
+| **SW**   | Switch signal: Low signal when the button is pressed. |
+| **VCC**  | Power supply: Typically 5V.                  |
+| **GND**  | Ground.                                      |
+
+## Usage
+1. Connect the KY-040 rotary encoder to your Arduino or other microcontroller:
+   - CLK to pin 7
+   - DT to pin 6
+   - SW to pin 5
+2. Upload the example code in `KY040_Driver.ino` to your microcontroller.
+3. Open the serial monitor to observe the rotation and button press events.
+
+## Example Code
+Below is an example implementation:
+
+```cpp
+// KY-040 Rotary Encoder Example Code
+
+const int CLK = 7;  // Clock pin
+const int DT = 6;   // Data pin
+const int SW = 5;   // Switch pin
+
+int lastCLKState = HIGH;  // Store the last CLK state
+
+void setup() {
+  Serial.begin(9600);  // Start serial monitor
+  pinMode(CLK, INPUT);
+  pinMode(DT, INPUT);
+  pinMode(SW, INPUT_PULLUP);  // Enable pull-up resistor for the button
+}
+
+void loop() {
+  int currentCLKState = digitalRead(CLK);  // Read current CLK state
+
+  // Detect rotation
+  if (currentCLKState != lastCLKState && currentCLKState == LOW) {
+    int dtState = digitalRead(DT);  // Read DT state
+    if (dtState != currentCLKState) {
+      Serial.println("Clockwise");
+    } else {
+      Serial.println("Counterclockwise");
+    }
+  }
+
+  // Detect button press
+  if (digitalRead(SW) == LOW) {
+    Serial.println("Button Pressed");
+    delay(200);  // Debounce delay
+  }
+
+  lastCLKState = currentCLKState;  // Update last state
+}
