@@ -16,7 +16,7 @@ This document explains how to use the KY-040 rotary encoder to control a servo m
 ## 2. Wiring
 Connect the KY-040 rotary encoder and servo motor to the Arduino as follows:
 
-| **KY-040 Pin**   | **Arduino Pin** | **Description**      |
+| **KY-040 Pin**    | **Arduino Pin** | **Description**      |
 |-------------------|-----------------|----------------------|
 | CLK (Clock)       | 7               | Rotary encoder clock |
 | DT (Data)         | 6               | Rotary encoder data  |
@@ -26,8 +26,9 @@ Connect the KY-040 rotary encoder and servo motor to the Arduino as follows:
 
 | **Servo Pin**     | **Arduino Pin** | **Description**      |
 |-------------------|-----------------|----------------------|
-| Signal            | 9               | Servo control signal |
-| VCC               | External 5V     | Servo power          |
-| GND               | GND             | Servo ground         |
+| Signal (Brown)    | 9               | Servo control signal |
+| VCC (Red)         | External 5V     | Servo power          |
+| GND (Black)       | GND             | Servo ground         |
 
 **Note:** Use an external power supply for the servo motor to avoid overloading the Arduino.
+![Uploading image.png…]()
